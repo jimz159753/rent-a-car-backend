@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Vehicle } from './schema/vehicle.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class VehiclesService {
-  create(createVehicleDto: CreateVehicleDto) {
-    return 'This action adds a new vehicle';
+  constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<Vehicle>) {
+    Vehicle;
   }
 
-  findAll() {
-    return `This action returns all vehicles`;
+  async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
+    const response = new this.vehicleModel(createVehicleDto);
+    return await response.save();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} vehicle`;
+  async findAll() {
+    return await this.vehicleModel.find().exec();
   }
 
-  update(id: number, updateVehicleDto: UpdateVehicleDto) {
-    return `This action updates a #${id} vehicle`;
+  async findOne(id: string) {
+    const response = await this.vehicleModel.findById(id).exec();
+    return response;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} vehicle`;
+  async update(id: string, updateVehicleDto: UpdateVehicleDto) {
+    const response = await this.vehicleModel
+      .updateOne({ _id: id }, { $set: updateVehicleDto })
+      .exec();
+    return response;
+  }
+
+  async remove(id: string) {
+    const response = await this.vehicleModel.deleteOne({ _id: id }).exec();
+    return response;
   }
 }
