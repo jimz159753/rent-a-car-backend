@@ -14,19 +14,24 @@ export class ClientsService {
     return await response.save();
   }
 
-  async findAll() {
+  async findAll(): Promise<Client[]> {
     return await this.clientModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOne(id: string): Promise<Client> {
+    const response = await this.clientModel.findById(id).exec();
+    return response;
   }
 
-  update(id: number, updateClientDto: UpdateClientDto) {
-    return `This action updates a #${id} client`;
+  async update(id: string, updateClientDto: UpdateClientDto) {
+    const response = await this.clientModel
+      .updateOne({ _id: id }, { $set: updateClientDto })
+      .exec();
+    return response;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} client`;
+  async remove(id: string) {
+    const response = await this.clientModel.deleteOne({ _id: id }).exec();
+    return response;
   }
 }
