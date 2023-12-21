@@ -10,6 +10,7 @@ export class ClientsService {
   constructor(@InjectModel(Client.name) private clientModel: Model<Client>) { }
 
   async create(createClientDto: CreateClientDto): Promise<Client> {
+    createClientDto.timestamp = new Date().toDateString();
     const response = new this.clientModel(createClientDto);
     return await response.save();
   }

@@ -18,7 +18,7 @@ export class Client {
     address: string;
 
     @Prop({ required: true })
-    date: string;
+    timestamp: string;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);

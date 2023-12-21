@@ -37,9 +37,5 @@ export class Client implements IClient {
 
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({
-        maxLength: 20,
-        example: '22/10/23',
-    })
-    date!: string;
+    timestamp: string;
 }

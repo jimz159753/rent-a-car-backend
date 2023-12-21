@@ -3,5 +3,5 @@ export interface IClient {
     name: string;
     phone: string;
     address: string;
-    date: string;
+    timestamp: string;
 }

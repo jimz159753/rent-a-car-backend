@@ -12,6 +12,7 @@ export class VehiclesService {
   }
 
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
+    createVehicleDto.timestamp = new Date().toDateString();
     const response = new this.vehicleModel(createVehicleDto);
     return await response.save();
   }

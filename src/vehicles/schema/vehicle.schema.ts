@@ -6,10 +6,7 @@ export type VehicleDocument = HydratedDocument<Vehicle>;
 @Schema()
 export class Vehicle {
     @Prop({ required: true })
-    client: string;
-
-    @Prop({ required: true })
-    vehicle: string;
+    name: string;
 
     @Prop({ required: true })
     days: number;
@@ -18,7 +15,7 @@ export class Vehicle {
     price: number;
 
     @Prop({ required: true })
-    payment: number;
+    timestamp: string;
 }
 
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);

@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
+import { Document } from './schema/document.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class DocumentsService {
-  create(createDocumentDto: CreateDocumentDto) {
-    return 'This action adds a new document';
+  constructor(
+    @InjectModel(Document.name) private documentModel: Model<Document>,
+  ) {
+    Document;
   }
 
-  findAll() {
-    return `This action returns all documents`;
+  async create(createDocumentDto: CreateDocumentDto) {
+    createDocumentDto.timestamp = new Date().toDateString();
+    const response = new this.documentModel(createDocumentDto);
+    return await response.save();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} document`;
+  async findAll() {
+    return await this.documentModel.find().exec();
   }
 
-  update(id: number, updateDocumentDto: UpdateDocumentDto) {
-    return `This action updates a #${id} document`;
+  async findOne(id: string) {
+    const response = await this.documentModel.findById(id).exec();
+    return response;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} document`;
+  async update(id: string, updateDocumentDto: UpdateDocumentDto) {
+    const response = await this.documentModel
+      .updateOne({ _id: id }, { $set: updateDocumentDto })
+      .exec();
+    return response;
+  }
+
+  async remove(id: string) {
+    const response = await this.documentModel.deleteOne({ _id: id }).exec();
+    return response;
   }
 }

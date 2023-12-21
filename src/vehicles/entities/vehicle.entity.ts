@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { IVehicle } from './vehicle.interface';
-import { IClient } from 'src/clients/entities/client.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Vehicle implements IVehicle {
@@ -8,17 +7,9 @@ export class Vehicle implements IVehicle {
     @IsString()
     @ApiProperty({
         maxLength: 30,
-        example: 'Luis Jimenez',
-    })
-    client: IClient['name'];
-
-    @IsNotEmpty()
-    @IsString()
-    @ApiProperty({
-        maxLength: 30,
         example: 'SUV',
     })
-    vehicle: string;
+    name: string;
 
     @IsNotEmpty()
     @IsNumber()
@@ -38,11 +29,6 @@ export class Vehicle implements IVehicle {
     price: number;
 
     @IsNotEmpty()
-    @IsNumber()
-    @ApiProperty({
-        description: 'Amount that client left',
-        maxLength: 20,
-        example: 1000,
-    })
-    payment: number;
+    @IsString()
+    timestamp: string;
 }
