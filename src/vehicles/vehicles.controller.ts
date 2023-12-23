@@ -67,8 +67,8 @@ export class VehiclesController {
   @Delete(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)
-  @ApiResponse({ status: 204, description: 'Vehicle removed successfully' })
-  @ApiResponse({ status: 404, description: 'Vehicle not found' })
+  @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Vehicle removed successfully' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Vehicle not found' })
   remove(@Param('id') id: string) {
     return this.vehiclesService.remove(id);
   }
