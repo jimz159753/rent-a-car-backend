@@ -1,6 +1,7 @@
 export interface IVehicle {
-    name: string;
-    days: number;
+    brand: string;
+    model: string;
+    image: string;
     price: number;
     timestamp: string;
 }

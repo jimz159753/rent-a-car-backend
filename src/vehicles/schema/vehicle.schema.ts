@@ -6,10 +6,13 @@ export type VehicleDocument = HydratedDocument<Vehicle>;
 @Schema()
 export class Vehicle {
     @Prop({ required: true })
-    name: string;
+    brand: string;
 
     @Prop({ required: true })
-    days: number;
+    model: string;
+
+    @Prop({ required: true })
+    image: string;
 
     @Prop({ required: true })
     price: number;

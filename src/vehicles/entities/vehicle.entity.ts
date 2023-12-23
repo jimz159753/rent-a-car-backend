@@ -6,18 +6,26 @@ export class Vehicle implements IVehicle {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({
-        maxLength: 30,
+        maxLength: 20,
         example: 'SUV',
     })
-    name: string;
+    model: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @ApiProperty({
         maxLength: 20,
-        example: 15,
+        example: 'Toyota',
     })
-    days: number;
+    brand: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty({
+        maxLength: 20,
+        example: './route/image',
+    })
+    image: string;
 
     @IsNotEmpty()
     @IsNumber()

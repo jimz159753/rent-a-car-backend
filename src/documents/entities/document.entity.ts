@@ -16,7 +16,6 @@ export class Document implements IDocument {
     @IsNotEmpty()
     @IsObject()
     @ApiProperty({
-        maxLength: 30,
         example: {
             dni: 'INE',
             name: 'Luis Jimenez',
