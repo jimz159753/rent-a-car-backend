@@ -6,6 +6,7 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Rent a car')
     .setDescription('Rent a car API description')
     .setVersion('1.0')

@@ -1,4 +1,4 @@
-import { IsObject, IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsObject, IsNotEmpty, IsString } from 'class-validator';
 import { IDocument } from './document.interface';
 import { IClient } from 'src/clients/entities/client.interface';
 import { ApiProperty } from '@nestjs/swagger';

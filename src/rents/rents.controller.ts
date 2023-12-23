@@ -7,12 +7,16 @@ import {
   Param,
   Delete,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { RentsService } from './rents.service';
 import { CreateRentDto } from './dto/create-rent.dto';
 import { UpdateRentDto } from './dto/update-rent.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags('Rents')
 @Controller('rents')
 export class RentsController {
