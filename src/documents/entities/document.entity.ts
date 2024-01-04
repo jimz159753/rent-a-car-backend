@@ -31,10 +31,13 @@ export class Document implements IDocument {
     @ApiProperty({
         maxLength: 30,
         example: {
-            name: 'SUV',
-            days: 14,
+            plate: 'GYU342',
+            model: 'SUV',
+            brand: 'Toyota',
+            image: './route/image',
             price: 200,
-            timestamp: '22/10/23',
+            status: 'available'
+
         },
     })
     vehicle: IVehicle;

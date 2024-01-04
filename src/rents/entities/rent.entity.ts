@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsString, IsObject } from 'class-validator';
 import { IRent } from './rent.interface';
 import { ApiProperty } from '@nestjs/swagger';
 import { IClient } from 'src/clients/entities/client.interface';
-import { IVehicle } from 'src/vehicles/entities/vehicle.interface';
+import { IVehicle, StatusEnum } from 'src/vehicles/entities/vehicle.interface';
 
 export class Rent implements IRent {
     @IsNotEmpty()
@@ -14,7 +14,7 @@ export class Rent implements IRent {
             name: 'Luis Jimenez',
             phone: '331234566',
             address: 'Patria 1234',
-            timestamp: '22/10/23',
+            timestamp: new Date().toDateString(),
         },
     })
     client: IClient;
@@ -24,10 +24,13 @@ export class Rent implements IRent {
     @ApiProperty({
         maxLength: 30,
         example: {
-            name: 'SUV',
-            days: 14,
-            price: 200,
-            timestamp: '22/10/23',
+            model: 'Sedan',
+            image: 'https://unsplash.com/es/fotos/coche-shelby-negro-en-la-carretera-YApiWyp0lqo',
+            brand: 'Ford',
+            plate: 'GDF343',
+            price: 500,
+            status: StatusEnum.AVAILABLE,
+            timestamp: new Date().toDateString(),
         },
     })
     vehicle: IVehicle;

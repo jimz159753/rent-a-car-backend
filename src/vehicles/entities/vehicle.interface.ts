@@ -1,7 +1,14 @@
 export interface IVehicle {
-    brand: string;
     model: string;
-    image: string;
+    image?: string;
+    brand: string;
+    plate: string;
     price: number;
+    status: StatusEnum;
     timestamp: string;
+}
+
+export enum StatusEnum {
+    AVAILABLE = 'Disponible',
+    RENTED = 'Alquildo'
 }
