@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsObject } from 'class-validator';
+import { IsNotEmpty, IsString, IsObject } from 'class-validator';
 import { IRent } from './rent.interface';
 import { ApiProperty } from '@nestjs/swagger';
 import { IClient } from 'src/clients/entities/client.interface';
@@ -29,35 +29,35 @@ export class Rent implements IRent {
             brand: 'Ford',
             plate: 'GDF343',
             price: 500,
-            status: StatusEnum.AVAILABLE,
+            status: 'Disponible',
             timestamp: new Date().toDateString(),
         },
     })
     vehicle: IVehicle;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @ApiProperty({
         maxLength: 30,
         example: 14,
     })
-    days: number;
+    days: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @ApiProperty({
         maxLength: 30,
         example: 1000,
     })
-    payment: number;
+    payment: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     @ApiProperty({
         maxLength: 10,
         example: 3000,
     })
-    total: number;
+    total: string;
 
     @IsNotEmpty()
     @IsString()

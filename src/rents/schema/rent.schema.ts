@@ -14,13 +14,13 @@ export class Rent {
     vehicle: IVehicle;
 
     @Prop({ required: true })
-    days: number;
+    days: string;
 
     @Prop({ required: true })
-    payment: number;
+    payment: string;
 
     @Prop({ required: true })
-    total: number;
+    total: string;
 
     @Prop({ required: true })
     description: string;

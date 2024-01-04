@@ -3,7 +3,7 @@ export interface IVehicle {
     image?: string;
     brand: string;
     plate: string;
-    price: number;
+    price: string;
     status: StatusEnum;
     timestamp: string;
 }

@@ -4,9 +4,9 @@ import { IVehicle } from 'src/vehicles/entities/vehicle.interface';
 export interface IRent {
     client: IClient;
     vehicle: IVehicle;
-    days: number;
-    payment: number;
-    total: number;
+    days: string;
+    payment: string;
+    total: string;
     description: string;
     timestamp: string;
 }
