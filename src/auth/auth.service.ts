@@ -15,10 +15,11 @@ export class AuthService {
 
     async register(registerAuthDto: RegisterAuthDto) {
         const { password } = registerAuthDto
+        registerAuthDto.timestamp = new Date().toDateString();
         const plainToHash = await hash(password, 10)
 
         const newUser = { ...registerAuthDto, password: plainToHash }
-        return this.userModel.create(newUser)
+        return await this.userModel.create(newUser)
     }
 
     async login(loginAuthDto: LoginAuthDto) {

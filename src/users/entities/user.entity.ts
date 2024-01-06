@@ -1,6 +1,7 @@
 import {
     IsEmail,
     IsNotEmpty,
+    IsPhoneNumber,
     IsString,
     IsStrongPassword,
 } from 'class-validator';
@@ -11,10 +12,11 @@ export class User implements IUser {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({
-        maxLength: 30,
-        example: 'lejc12345',
+        description: 'Price per day',
+        maxLength: 20,
+        example: 'Luis Jimenez',
     })
-    username: string;
+    name: string;
 
     @IsNotEmpty()
     @IsEmail()
@@ -25,22 +27,21 @@ export class User implements IUser {
     email: string;
 
     @IsNotEmpty()
-    @IsString()
-    @IsStrongPassword()
+    @IsPhoneNumber()
     @ApiProperty({
-        maxLength: 20,
-        example: 15,
+        maxLength: 30,
+        example: '3314236578',
     })
-    password: string;
+    phone: string;
 
     @IsNotEmpty()
     @IsString()
     @ApiProperty({
         description: 'Price per day',
         maxLength: 20,
-        example: 'Luis Jimenez',
+        example: 'Av.Patria #1234, La Estancia',
     })
-    name: string;
+    address: string;
 
     @IsNotEmpty()
     @IsString()
@@ -50,6 +51,15 @@ export class User implements IUser {
         example: 'Admin',
     })
     role: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsStrongPassword()
+    @ApiProperty({
+        maxLength: 20,
+        example: 'temporal_password',
+    })
+    password: string;
 
     @IsString()
     @IsNotEmpty()

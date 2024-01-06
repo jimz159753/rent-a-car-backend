@@ -12,7 +12,6 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
-    createUserDto.timestamp = new Date().toDateString();
     const response = new this.userModel(createUserDto);
     return await response.save();
   }
