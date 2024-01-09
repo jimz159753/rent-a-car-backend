@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Vehicle } from './schema/vehicle.schema';
 import { Model } from 'mongoose';
 
+
 @Injectable()
 export class VehiclesService {
   constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<Vehicle>) {

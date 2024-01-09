@@ -1,6 +1,6 @@
 export interface IVehicle {
     model: string;
-    image?: string;
+    image: string;
     brand: string;
     plate: string;
     price: string;

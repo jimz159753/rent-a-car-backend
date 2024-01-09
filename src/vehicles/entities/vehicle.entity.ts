@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { IVehicle, StatusEnum } from './vehicle.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -27,11 +27,11 @@ export class Vehicle implements IVehicle {
     })
     brand: string;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsString()
     @ApiProperty({
         maxLength: 20,
-        example: './route/image',
+        example: 'image.png',
     })
     image: string;
 

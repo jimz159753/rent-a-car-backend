@@ -9,13 +9,16 @@ import {
   HttpCode,
   UseGuards,
   HttpStatus,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { VehiclesService } from './vehicles.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 @ApiTags('Vehicles')
 @Controller('vehicles')
 export class VehiclesController {
@@ -24,11 +27,23 @@ export class VehiclesController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
+  @ApiConsumes('multipart/form-data')
   @HttpCode(HttpStatus.CREATED)
   @HttpCode(HttpStatus.BAD_REQUEST)
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Vehicle created successfully' })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Bad request' })
-  create(@Body() createVehicleDto: CreateVehicleDto) {
+  @UseInterceptors(
+    FileInterceptor("image", {
+      storage: diskStorage({
+        destination: './files',
+        filename: (_request, file, callback) => {
+          callback(null, `${new Date().getTime()}-${file.originalname}`)
+        }
+      }),
+    }),
+  )
+  create(@Body() createVehicleDto: CreateVehicleDto, @UploadedFile() file: Express.Multer.File) {
+    createVehicleDto.image = file.filename
     return this.vehiclesService.create(createVehicleDto);
   }
 
