@@ -1,6 +1,5 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, IsStrongPassword } from "class-validator"
-import { LoginAuthDto } from "./login-auth.dto";
 
 export class RegisterAuthDto {
     @IsNotEmpty()

@@ -6,6 +6,7 @@ import { hash, compare } from 'bcrypt'
 import { User, UserDocument } from 'src/users/schema/user.schema';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UpdatePasswordAuthDto } from './dto/update-password-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -40,5 +41,14 @@ export class AuthService {
         }
 
         return data
+    }
+
+    async updatePassword(id, updatePasswordAuthDto: UpdatePasswordAuthDto) {
+        const { password } = updatePasswordAuthDto
+        const plainToHash = await hash(password, 10)
+
+        const newUser = { ...updatePasswordAuthDto, password: plainToHash }
+        return await this.userModel.updateOne({ _id: id }, { $set: newUser })
+            .exec();
     }
 }
