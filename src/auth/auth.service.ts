@@ -51,4 +51,8 @@ export class AuthService {
         return await this.userModel.updateOne({ _id: id }, { $set: newUser })
             .exec();
     }
+
+    async logoutUser() {
+        return
+    }
 }

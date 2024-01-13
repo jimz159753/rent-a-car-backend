@@ -42,7 +42,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.OK, description: 'User logout successfully' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Error' })
   logoutUser(@Res({ passthrough: true }) response) {
-    response.cookie('token', { expires: new Date(Date.now()) })
+    response.clearCookie('token')
     return this.authService.logoutUser();
   }
 
