@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
@@ -28,10 +28,26 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: ' User logged in successfully' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Bad request' })
   @Post('login')
-  loginUser(@Body() loginAuthDto: LoginAuthDto) {
-    return this.authService.login(loginAuthDto)
+  async loginUser(@Body() loginAuthDto: LoginAuthDto, @Res({ passthrough: true }) response) {
+    const res = await this.authService.login(loginAuthDto)
+    response.cookie('token', res.token)
+    return res
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Get('logout')
+  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NOT_FOUND)
+  @ApiResponse({ status: HttpStatus.OK, description: 'User logout successfully' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Error' })
+  logoutUser(@Res({ passthrough: true }) response) {
+    response.cookie('token', { expires: new Date(Date.now()) })
+    return this.authService.logoutUser();
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: ' User password updated successfully' })
