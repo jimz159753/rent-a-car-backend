@@ -11,7 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     credentials: true,
-    origin: true
+    origin: 'https://www.rhbrentauncarro.com'
   });
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');

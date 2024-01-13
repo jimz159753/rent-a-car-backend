@@ -33,8 +33,7 @@ export class AuthController {
     response.cookie('token', res.token, {
       httpOnly: true,
       secure: true,
-      sameSite: 'none',
-      domain: 'https://rhbrentauncarro.com'
+      sameSite: 'None',
     })
     return res
   }
