@@ -32,8 +32,9 @@ export class AuthController {
     const res = await this.authService.login(loginAuthDto)
     response.cookie('token', res.token, {
       httpOnly: true,
-      secure: 'production',
-      sameSite: 'none'
+      secure: true,
+      sameSite: 'none',
+      domain: 'https://rhbrentauncarro.com'
     })
     return res
   }
