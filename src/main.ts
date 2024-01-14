@@ -11,15 +11,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     credentials: true,
-    origin: 'https://www.rhbrentauncarro.com'
+    origin: true
   });
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Origin', 'https://rhbrentauncarro.com');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-  });
-
   app.use(cookieParser());
   const config = new DocumentBuilder()
     .addBearerAuth()
