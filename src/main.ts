@@ -3,6 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
+import helmet from 'helmet';
 dotenv.config();
 
 declare const module: any;
@@ -13,6 +14,7 @@ async function bootstrap() {
     credentials: true,
     origin: true
   });
+  app.use(helmet())
   app.use(cookieParser());
   const config = new DocumentBuilder()
     .addBearerAuth()
