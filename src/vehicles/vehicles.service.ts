@@ -27,6 +27,11 @@ export class VehiclesService {
     return response;
   }
 
+  async findByCategory(category: string) {
+    const response = await this.vehicleModel.find({ category })
+    return response;
+  }
+
   async update(id: string, updateVehicleDto: UpdateVehicleDto) {
     const response = await this.vehicleModel
       .updateOne({ _id: id }, { $set: updateVehicleDto })

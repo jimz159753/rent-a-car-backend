@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { IVehicle, StatusEnum } from './vehicle.interface';
+import { CategoryEnum, IVehicle, StatusEnum } from './vehicle.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Vehicle implements IVehicle {
@@ -10,6 +10,14 @@ export class Vehicle implements IVehicle {
         example: 'GYU342',
     })
     plate: string;
+
+    @IsNotEmpty()
+    @IsEnum(CategoryEnum)
+    @ApiProperty({
+        maxLength: 20,
+        example: CategoryEnum.SEDAN,
+    })
+    category: CategoryEnum;
 
     @IsNotEmpty()
     @IsString()

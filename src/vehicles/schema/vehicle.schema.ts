@@ -9,6 +9,9 @@ export class Vehicle {
     plate: string;
 
     @Prop({ required: true })
+    category: string;
+
+    @Prop({ required: true })
     brand: string;
 
     @Prop({ required: true })

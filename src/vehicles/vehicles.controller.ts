@@ -66,6 +66,15 @@ export class VehiclesController {
     return this.vehiclesService.findOne(id);
   }
 
+  @Get('category/:category')
+  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NOT_FOUND)
+  @ApiResponse({ status: HttpStatus.OK, description: 'Vehicle found' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Vehicle not found' })
+  findByCategory(@Param('category') category: string) {
+    return this.vehiclesService.findByCategory(category);
+  }
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
