@@ -4,13 +4,14 @@ import { UpdateClientDto } from './dto/update-client.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Client } from './schemas/client.schema';
 import { Model } from 'mongoose';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class ClientsService {
   constructor(@InjectModel(Client.name) private clientModel: Model<Client>) { }
 
   async create(createClientDto: CreateClientDto): Promise<Client> {
-    createClientDto.timestamp = new Date().toDateString();
+    createClientDto.timestamp = dayjs().format('DD-MM-YYYY');
     const response = new this.clientModel(createClientDto);
     return await response.save();
   }

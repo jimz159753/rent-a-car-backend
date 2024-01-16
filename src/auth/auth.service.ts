@@ -7,6 +7,7 @@ import { User, UserDocument } from 'src/users/schema/user.schema';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UpdatePasswordAuthDto } from './dto/update-password-auth.dto';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
 
     async register(registerAuthDto: RegisterAuthDto) {
         const { password } = registerAuthDto
-        registerAuthDto.timestamp = new Date().toDateString();
+        registerAuthDto.timestamp = dayjs().format('DD-MM-YYYY');
         const plainToHash = await hash(password, 10)
 
         const newUser = { ...registerAuthDto, password: plainToHash }

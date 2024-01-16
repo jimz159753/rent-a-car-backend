@@ -14,6 +14,12 @@ export class Rent {
     vehicle: IVehicle;
 
     @Prop({ required: true })
+    startDate: string;
+
+    @Prop({ required: true })
+    endDate: string;
+
+    @Prop({ required: true })
     days: string;
 
     @Prop({ required: true })

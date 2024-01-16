@@ -4,7 +4,7 @@ import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Vehicle } from './schema/vehicle.schema';
 import { Model } from 'mongoose';
-
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class VehiclesService {
@@ -13,7 +13,7 @@ export class VehiclesService {
   }
 
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
-    createVehicleDto.timestamp = new Date().toDateString();
+    createVehicleDto.timestamp = dayjs().format('DD-MM-YYYY');
     const response = new this.vehicleModel(createVehicleDto);
     return await response.save();
   }

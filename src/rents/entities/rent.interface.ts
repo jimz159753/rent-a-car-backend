@@ -7,6 +7,8 @@ export interface IRent {
     days: string;
     payment: string;
     total: string;
+    startDate: string;
+    endDate: string;
     description: string;
     timestamp: string;
 }

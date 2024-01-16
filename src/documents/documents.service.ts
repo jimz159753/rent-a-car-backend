@@ -4,6 +4,7 @@ import { UpdateDocumentDto } from './dto/update-document.dto';
 import { Document } from './schema/document.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class DocumentsService {
@@ -14,7 +15,7 @@ export class DocumentsService {
   }
 
   async create(createDocumentDto: CreateDocumentDto) {
-    createDocumentDto.timestamp = new Date().toDateString();
+    createDocumentDto.timestamp = dayjs().format('DD-MM-YYYY');
     const response = new this.documentModel(createDocumentDto);
     return await response.save();
   }
