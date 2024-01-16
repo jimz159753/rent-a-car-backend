@@ -1,5 +1,12 @@
 export interface IVehicle {
     model: string;
+    ac: boolean;
+    type: string;
+    people: string;
+    doors: string;
+    suitcases: string;
+    bags: string;
+    transmition: TransmitionEnum,
     category: CategoryEnum;
     image: string;
     brand: string;
@@ -7,6 +14,11 @@ export interface IVehicle {
     price: string;
     status: StatusEnum;
     timestamp: string;
+}
+
+export enum TransmitionEnum {
+    AUTOMATIC = 'Automático',
+    STANDARD = 'Manual'
 }
 
 export enum StatusEnum {
