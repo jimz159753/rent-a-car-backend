@@ -84,4 +84,8 @@ export class Rent implements IRent {
     @IsNotEmpty()
     @IsString()
     timestamp: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastUpdate: string;
 }

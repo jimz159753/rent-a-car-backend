@@ -11,4 +11,5 @@ export interface IRent {
     endDate: string;
     description: string;
     timestamp: string;
+    lastUpdate: string;
 }

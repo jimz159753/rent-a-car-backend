@@ -33,6 +33,9 @@ export class Rent {
 
     @Prop({ required: true })
     timestamp: string;
+
+    @Prop({ required: true })
+    lastUpdate: string;
 }
 
 export const RentSchema = SchemaFactory.createForClass(Rent);

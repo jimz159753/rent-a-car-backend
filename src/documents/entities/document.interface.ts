@@ -6,4 +6,5 @@ export interface IDocument {
     client: IClient;
     vehicle: IVehicle;
     timestamp: string;
+    lastUpdate: string;
 }

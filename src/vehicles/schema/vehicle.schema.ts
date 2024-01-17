@@ -49,6 +49,9 @@ export class Vehicle {
 
     @Prop({ required: true })
     timestamp: string;
+
+    @Prop({ required: true })
+    lastUpdate: string;
 }
 
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);

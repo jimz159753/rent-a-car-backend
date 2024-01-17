@@ -6,4 +6,5 @@ export interface IUser {
     role: string;
     password: string;
     timestamp: string;
+    lastUpdate: string;
 }

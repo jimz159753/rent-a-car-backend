@@ -64,4 +64,8 @@ export class User implements IUser {
     @IsString()
     @IsNotEmpty()
     timestamp: string;
+
+    @IsString()
+    @IsNotEmpty()
+    lastUpdate: string;
 }

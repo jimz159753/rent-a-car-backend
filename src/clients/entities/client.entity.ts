@@ -38,4 +38,8 @@ export class Client implements IClient {
     @IsNotEmpty()
     @IsString()
     timestamp: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastUpdate: string;
 }

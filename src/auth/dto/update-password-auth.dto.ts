@@ -1,4 +1,4 @@
 import { RegisterAuthDto } from "./register-auth.dto";
-import { PickType } from "@nestjs/swagger";
+import { PartialType } from "@nestjs/swagger";
 
-export class UpdatePasswordAuthDto extends PickType(RegisterAuthDto, ['password']) { }
+export class UpdatePasswordAuthDto extends PartialType(RegisterAuthDto) { }

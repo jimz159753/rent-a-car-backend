@@ -14,6 +14,7 @@ export class VehiclesService {
 
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
     createVehicleDto.timestamp = dayjs().format('DD-MM-YYYY');
+    createVehicleDto.lastUpdate = dayjs().format('DD-MM-YYYY');
     const response = new this.vehicleModel(createVehicleDto);
     return await response.save();
   }
@@ -33,6 +34,7 @@ export class VehiclesService {
   }
 
   async update(id: string, updateVehicleDto: UpdateVehicleDto) {
+    updateVehicleDto.lastUpdate = dayjs().format('DD-MM-YYYY');
     const response = await this.vehicleModel
       .updateOne({ _id: id }, { $set: updateVehicleDto })
       .exec();

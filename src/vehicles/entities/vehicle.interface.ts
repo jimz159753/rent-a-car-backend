@@ -14,6 +14,7 @@ export interface IVehicle {
     price: string;
     status: StatusEnum;
     timestamp: string;
+    lastUpdate: string;
 }
 
 export enum TransmitionEnum {

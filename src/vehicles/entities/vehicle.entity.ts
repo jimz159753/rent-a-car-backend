@@ -119,4 +119,8 @@ export class Vehicle implements IVehicle {
     @IsNotEmpty()
     @IsString()
     timestamp: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastUpdate: string;
 }

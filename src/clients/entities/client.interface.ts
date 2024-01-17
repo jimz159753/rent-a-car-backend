@@ -4,4 +4,5 @@ export interface IClient {
     phone: string;
     address: string;
     timestamp: string;
+    lastUpdate: string;
 }

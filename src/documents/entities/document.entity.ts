@@ -45,4 +45,8 @@ export class Document implements IDocument {
     @IsNotEmpty()
     @IsString()
     timestamp: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastUpdate: string;
 }

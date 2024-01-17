@@ -18,6 +18,9 @@ export class Document {
 
     @Prop({ required: true })
     timestamp: string;
+
+    @Prop({ required: true })
+    lastUpdate: string;
 }
 
 export const DocumentSchema = SchemaFactory.createForClass(Document);

@@ -25,6 +25,9 @@ export class User {
 
     @Prop({ required: true })
     timestamp: string;
+
+    @Prop({ required: true })
+    lastUpdate: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

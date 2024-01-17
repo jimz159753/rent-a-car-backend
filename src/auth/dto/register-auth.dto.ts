@@ -57,4 +57,8 @@ export class RegisterAuthDto {
     @IsString()
     @IsNotEmpty()
     timestamp: string;
+
+    @IsString()
+    @IsNotEmpty()
+    lastUpdate: string;
 }

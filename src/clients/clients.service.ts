@@ -12,6 +12,7 @@ export class ClientsService {
 
   async create(createClientDto: CreateClientDto): Promise<Client> {
     createClientDto.timestamp = dayjs().format('DD-MM-YYYY');
+    createClientDto.lastUpdate = dayjs().format('DD-MM-YYYY');
     const response = new this.clientModel(createClientDto);
     return await response.save();
   }
@@ -26,6 +27,7 @@ export class ClientsService {
   }
 
   async update(id: string, updateClientDto: UpdateClientDto) {
+    updateClientDto.lastUpdate = dayjs().format('DD-MM-YYYY');
     const response = await this.clientModel
       .updateOne({ _id: id }, { $set: updateClientDto })
       .exec();
