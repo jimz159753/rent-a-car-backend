@@ -13,8 +13,8 @@ export class RentsService {
   }
 
   async create(createRentDto: CreateRentDto) {
-    createRentDto.timestamp = dayjs().format('DD-MM-YYYY');
-    createRentDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+    createRentDto.timestamp = Date.now().toString();
+    createRentDto.lastUpdate = Date.now().toString();
     const response = new this.rentModel(createRentDto);
     return await response.save();
   }
@@ -29,7 +29,7 @@ export class RentsService {
   }
 
   async update(id: string, updateRentDto: UpdateRentDto) {
-    updateRentDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+    updateRentDto.lastUpdate = Date.now().toString();
     const response = await this.rentModel
       .updateOne({ _id: id }, { $set: updateRentDto })
       .exec();

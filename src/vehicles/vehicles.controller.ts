@@ -11,6 +11,7 @@ import {
   HttpStatus,
   UploadedFile,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { VehiclesService } from './vehicles.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
@@ -73,6 +74,15 @@ export class VehiclesController {
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Vehicle not found' })
   findByCategory(@Param('category') category: string) {
     return this.vehiclesService.findByCategory(category);
+  }
+
+  @Get('dates/available')
+  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NOT_FOUND)
+  @ApiResponse({ status: HttpStatus.OK, description: 'Vehicle found' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Vehicle not found' })
+  findAvailables(@Query() { startDate, endDate }) {
+    return this.vehiclesService.findAvailables(startDate, endDate);
   }
 
   @ApiBearerAuth()

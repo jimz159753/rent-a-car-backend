@@ -1,4 +1,5 @@
 export interface IVehicle {
+    _id?: string;
     model: string;
     ac: boolean;
     type: string;

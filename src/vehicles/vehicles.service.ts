@@ -5,11 +5,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Vehicle } from './schema/vehicle.schema';
 import { Model } from 'mongoose';
 import * as dayjs from 'dayjs';
+import { Rent } from 'src/rents/schema/rent.schema';
+import { IVehicle, StatusEnum } from './entities/vehicle.interface';
+import { IRent } from 'src/rents/entities/rent.interface';
 
 @Injectable()
 export class VehiclesService {
-  constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<Vehicle>) {
+  constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<Vehicle>,
+    @InjectModel(Rent.name) private rentModel: Model<Rent>) {
     Vehicle;
+    Rent;
   }
 
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
@@ -31,6 +36,27 @@ export class VehiclesService {
   async findByCategory(category: string) {
     const response = await this.vehicleModel.find({ category })
     return response;
+  }
+
+  async findAvailables(startDate: string, endDate: string) {
+    const response: IRent[] = await this.rentModel.find({
+      $or: [
+        {
+          startDate: { $lte: endDate },
+          endDate: { $gte: startDate },
+          'vehicle.status': StatusEnum.RENTED
+        },
+
+      ]
+    })
+    let vehicles: IVehicle[]
+    if (response.length) {
+      const vehicleFilterIds = response.map(el => el.vehicle._id)
+      vehicles = await this.vehicleModel.find({ '_id': { $nin: vehicleFilterIds } })
+    } else {
+      vehicles = await this.vehicleModel.find()
+    }
+    return vehicles;
   }
 
   async update(id: string, updateVehicleDto: UpdateVehicleDto) {
