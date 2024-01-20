@@ -15,8 +15,8 @@ export class DocumentsService {
   }
 
   async create(createDocumentDto: CreateDocumentDto) {
-    createDocumentDto.timestamp = dayjs().format('DD-MM-YYYY');
-    createDocumentDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+    createDocumentDto.timestamp = dayjs().format('DD-MM-YYYY hh:mm a');
+    createDocumentDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
     const response = new this.documentModel(createDocumentDto);
     return await response.save();
   }
@@ -31,7 +31,7 @@ export class DocumentsService {
   }
 
   async update(id: string, updateDocumentDto: UpdateDocumentDto) {
-    updateDocumentDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+    updateDocumentDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
     const response = await this.documentModel
       .updateOne({ _id: id }, { $set: updateDocumentDto })
       .exec();

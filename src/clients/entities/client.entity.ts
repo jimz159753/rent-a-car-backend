@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { IClient } from './client.interface';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -9,7 +9,7 @@ export class Client implements IClient {
         maxLength: 20,
         example: 'INE',
     })
-    dni!: string;
+    dni: string;
 
     @IsNotEmpty()
     @IsString()
@@ -17,7 +17,31 @@ export class Client implements IClient {
         maxLength: 30,
         example: 'Luis Jimenez',
     })
-    name!: string;
+    name: string;
+
+    @IsNotEmpty()
+    @IsEmail()
+    @ApiProperty({
+        maxLength: 30,
+        example: 'luis@gmail.com',
+    })
+    email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty({
+        maxLength: 30,
+        example: '13-04-19992',
+    })
+    birthday: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty({
+        maxLength: 30,
+        example: 'Mexico',
+    })
+    country: string;
 
     @IsNotEmpty()
     @IsString()

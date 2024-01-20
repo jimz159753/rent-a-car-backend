@@ -18,6 +18,15 @@ export class Client {
     address: string;
 
     @Prop({ required: true })
+    email: string;
+
+    @Prop({ required: true })
+    birthday: string;
+
+    @Prop({ required: true })
+    country: string;
+
+    @Prop({ required: true })
     timestamp: string;
 
     @Prop({ required: true })

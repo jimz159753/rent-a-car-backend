@@ -27,7 +27,8 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    updateUserDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+    console.log('UPDATE')
+    updateUserDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
     const response = await this.userModel
       .updateOne({ _id: id }, { $set: updateUserDto })
       .exec();

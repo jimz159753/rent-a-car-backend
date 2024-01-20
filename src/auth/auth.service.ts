@@ -17,8 +17,8 @@ export class AuthService {
 
     async register(registerAuthDto: RegisterAuthDto) {
         const { password } = registerAuthDto
-        registerAuthDto.timestamp = dayjs().format('DD-MM-YYYY');
-        registerAuthDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+        registerAuthDto.timestamp = dayjs().format('DD-MM-YYYY hh:mm a');
+        registerAuthDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
         const plainToHash = await hash(password, 10)
 
         const newUser = { ...registerAuthDto, password: plainToHash }
@@ -47,7 +47,7 @@ export class AuthService {
 
     async updatePassword(id, updatePasswordAuthDto: UpdatePasswordAuthDto) {
         const { password } = updatePasswordAuthDto
-        updatePasswordAuthDto.lastUpdate = dayjs().format('DD-MM-YYYY');
+        updatePasswordAuthDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
         const plainToHash = await hash(password, 10)
 
         const newUser = { ...updatePasswordAuthDto, password: plainToHash }
