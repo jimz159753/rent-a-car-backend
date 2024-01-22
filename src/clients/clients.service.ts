@@ -11,6 +11,7 @@ export class ClientsService {
   constructor(@InjectModel(Client.name) private clientModel: Model<Client>) { }
 
   async create(createClientDto: CreateClientDto): Promise<Client> {
+    createClientDto.birthday = dayjs(createClientDto.birthday).format('DD-MM-YYYY')
     createClientDto.timestamp = dayjs().format('DD-MM-YYYY hh:mm a');
     createClientDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
     const response = new this.clientModel(createClientDto);
