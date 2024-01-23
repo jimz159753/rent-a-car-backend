@@ -10,6 +10,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { StripeModule } from './stripe/stripe.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 
 @Module({
@@ -23,6 +26,7 @@ import { MulterModule } from '@nestjs/platform-express';
     MongooseModule.forRoot(process.env.DATABASE_URI),
     AuthModule,
     MulterModule.register(),
+    StripeModule.forRoot(process.env.STRIPE_KEY, { apiVersion: '2023-10-16' }),
 
   ],
   controllers: [AppController],

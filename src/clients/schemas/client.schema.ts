@@ -6,9 +6,6 @@ export type ClientDocument = HydratedDocument<Client>;
 @Schema()
 export class Client {
     @Prop({ required: true })
-    dni: string;
-
-    @Prop({ required: true })
     name: string;
 
     @Prop({ required: true })
@@ -17,7 +14,7 @@ export class Client {
     @Prop({ required: true })
     address: string;
 
-    @Prop({ required: true })
+    @Prop({ required: true, unique: true })
     email: string;
 
     @Prop({ required: true })
@@ -33,4 +30,4 @@ export class Client {
     lastUpdate: string;
 }
 
-export const ClientSchema = SchemaFactory.createForClass(Client);
+export const ClientSchema = SchemaFactory.createForClass(Client).index({ email: 1 }, { unique: true });

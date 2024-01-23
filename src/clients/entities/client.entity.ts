@@ -6,14 +6,6 @@ export class Client implements IClient {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({
-        maxLength: 20,
-        example: 'INE',
-    })
-    dni: string;
-
-    @IsNotEmpty()
-    @IsString()
-    @ApiProperty({
         maxLength: 30,
         example: 'Luis Jimenez',
     })

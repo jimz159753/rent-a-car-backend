@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsString, IsObject } from 'class-validator';
-import { IRent } from './rent.interface';
 import { ApiProperty } from '@nestjs/swagger';
 import { IClient } from 'src/clients/entities/client.interface';
 import { IVehicle } from 'src/vehicles/entities/vehicle.interface';
+import { IStripe } from './stripe.interface';
 import * as dayjs from 'dayjs';
 
-export class Rent implements IRent {
+export class Stripe implements IStripe {
     @IsNotEmpty()
     @IsObject()
     @ApiProperty({
