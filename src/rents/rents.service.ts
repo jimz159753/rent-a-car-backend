@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Rent } from './schema/rent.schema';
 import { Model } from 'mongoose';
 import * as dayjs from 'dayjs';
+import { IRent } from './entities/rent.interface';
 
 @Injectable()
 export class RentsService {
@@ -15,8 +16,24 @@ export class RentsService {
   async create(createRentDto: CreateRentDto) {
     createRentDto.timestamp = dayjs().format('DD-MM-YYYY hh:mm a');
     createRentDto.lastUpdate = dayjs().format('DD-MM-YYYY hh:mm a');
+
+    const vehiclesRented: IRent[] = await this.rentModel.find({
+      startDate: { $lte: createRentDto.endDate },
+      endDate: { $gte: createRentDto.startDate }
+    })
+
+    if (vehiclesRented.length) {
+      const isRented = vehiclesRented.some(el => el.vehicle.plate === createRentDto.vehicle.plate)
+      if (isRented) {
+        return { status: 404, message: 'El vehículo ya esta rentado' }
+      } else {
+        const response = new this.rentModel(createRentDto);
+        return await response.save();
+      }
+    }
     const response = new this.rentModel(createRentDto);
     return await response.save();
+
   }
 
   async findAll() {

@@ -40,14 +40,8 @@ export class VehiclesService {
 
   async findAvailables(startDate: string, endDate: string) {
     const response: IRent[] = await this.rentModel.find({
-      $or: [
-        {
-          startDate: { $lte: endDate },
-          endDate: { $gte: startDate },
-          'vehicle.status': StatusEnum.RENTED
-        },
-
-      ]
+      startDate: { $lte: endDate },
+      endDate: { $gte: startDate }
     })
     let vehicles: IVehicle[]
     if (response.length) {
