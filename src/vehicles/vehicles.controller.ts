@@ -26,8 +26,6 @@ import { diskStorage } from 'multer';
 export class VehiclesController {
   constructor(private readonly vehiclesService: VehiclesService) { }
 
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
   @Post()
   @ApiConsumes('multipart/form-data')
   @HttpCode(HttpStatus.CREATED)

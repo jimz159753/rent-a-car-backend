@@ -9,7 +9,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 export class StripeController {
   constructor(private readonly stripeService: StripeService) { }
 
-  @Post()
+  @Post('/session')
   @HttpCode(HttpStatus.CREATED)
   @HttpCode(HttpStatus.BAD_REQUEST)
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Payment created successfully' })
@@ -18,14 +18,14 @@ export class StripeController {
     return this.stripeService.create(createStripeDto);
   }
 
-  @Get()
+  @Get('/session')
   findAll() {
     return this.stripeService.findAll();
   }
 
-  @Get(':id')
+  @Get('/session/:id')
   findOne(@Param('id') id: string) {
-    return this.stripeService.findOne(+id);
+    return this.stripeService.findOne(id);
   }
 
   @Patch(':id')

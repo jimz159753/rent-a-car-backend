@@ -22,13 +22,13 @@ export class Rent {
     @Prop({ required: true })
     days: string;
 
-    @Prop({ required: true })
+    @Prop()
     payment: string;
 
     @Prop({ required: true })
     total: string;
 
-    @Prop({ required: true })
+    @Prop()
     description: string;
 
     @Prop({ required: true })
@@ -38,4 +38,4 @@ export class Rent {
     lastUpdate: string;
 }
 
-export const RentSchema = SchemaFactory.createForClass(Rent);
+export const RentSchema = SchemaFactory.createForClass(Rent).index({ client: 1 }, { unique: true });

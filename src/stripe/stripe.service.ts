@@ -25,7 +25,7 @@ export class StripeService {
       description
     }
     return await this.stripe.checkout.sessions.create({
-      success_url: `${process.env.CLIENT_URL}/success`,
+      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       line_items: [
         {
           quantity: 1,
@@ -48,8 +48,8 @@ export class StripeService {
     return await this.stripe.checkout.sessions.list();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} stripe`;
+  async findOne(id: string) {
+    return await this.stripe.checkout.sessions.retrieve(id);
   }
 
   update(id: number, updateStripeDto: UpdateStripeDto) {

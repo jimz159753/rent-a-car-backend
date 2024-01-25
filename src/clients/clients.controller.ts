@@ -16,8 +16,6 @@ import { UpdateClientDto } from './dto/update-client.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @ApiTags('Clients')
 @Controller('clients')
 export class ClientsController {
@@ -32,6 +30,8 @@ export class ClientsController {
     return this.clientsService.create(createClientDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get()
   @HttpCode(HttpStatus.OK)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -41,6 +41,8 @@ export class ClientsController {
     return this.clientsService.findAll();
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -50,6 +52,8 @@ export class ClientsController {
     return this.clientsService.findOne(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -60,6 +64,8 @@ export class ClientsController {
     return this.clientsService.update(id, updateClientDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)

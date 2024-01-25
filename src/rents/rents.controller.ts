@@ -16,8 +16,6 @@ import { UpdateRentDto } from './dto/update-rent.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @ApiTags('Rents')
 @Controller('rents')
 export class RentsController {
@@ -32,6 +30,8 @@ export class RentsController {
     return this.rentsService.create(createRentDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get()
   @HttpCode(HttpStatus.OK)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -41,6 +41,8 @@ export class RentsController {
     return this.rentsService.findAll();
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -50,6 +52,8 @@ export class RentsController {
     return this.rentsService.findOne(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)
@@ -60,6 +64,8 @@ export class RentsController {
     return this.rentsService.update(id, updateRentDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   @HttpCode(HttpStatus.NOT_FOUND)
