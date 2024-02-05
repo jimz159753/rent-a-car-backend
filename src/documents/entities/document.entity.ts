@@ -1,8 +1,8 @@
 import { IsObject, IsNotEmpty, IsString } from 'class-validator';
 import { IDocument } from './document.interface';
-import { IClient } from 'src/clients/entities/client.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { IVehicle } from 'src/vehicles/entities/vehicle.interface';
+import { IRent } from 'src/rents/entities/rent.interface';
+import * as dayjs from 'dayjs';
 
 export class Document implements IDocument {
     @IsNotEmpty()
@@ -17,30 +17,35 @@ export class Document implements IDocument {
     @IsObject()
     @ApiProperty({
         example: {
-            dni: 'INE',
-            name: 'Luis Jimenez',
-            phone: '331234566',
-            address: 'Patria 1234',
-            timestamp: '22/10/23',
-        },
-    })
-    client: IClient;
+            client: {
+                name: 'Luis Jimenez',
+                phone: '331232343',
+                address: 'Trafalgar #1234',
+                email: 'luis@gmail.com',
+                birthday: dayjs().format('YYYY-MM-DD'),
+                country: 'US',
+                timestamp: dayjs().format('DD-MM-YYYY hh:mm a'),
+            },
+            vehicle: {
+                plate: 'GYU342',
+                model: 'SUV',
+                brand: 'Toyota',
+                image: './route/image',
+                price: 200,
+                status: 'available'
 
-    @IsNotEmpty()
-    @IsObject()
-    @ApiProperty({
-        maxLength: 30,
-        example: {
-            plate: 'GYU342',
-            model: 'SUV',
-            brand: 'Toyota',
-            image: './route/image',
-            price: 200,
-            status: 'available'
-
-        },
+            },
+            days: '20',
+            payment: '1000',
+            total: '3000',
+            startDate: dayjs().format('YYYY-MM-DD'),
+            endDate: dayjs().format('YYYY-MM-DD'),
+            description: 'Cualquier descripcion',
+            timestamp: dayjs().format('DD-MM-YYYY hh:mm a'),
+            lastUpdate: dayjs().format('DD-MM-YYYY hh:mm a'),
+        }
     })
-    vehicle: IVehicle;
+    rent: IRent
 
     @IsNotEmpty()
     @IsString()

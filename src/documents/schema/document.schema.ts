@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { IClient } from 'src/clients/entities/client.interface';
-import { IVehicle } from 'src/vehicles/entities/vehicle.interface';
+import { IRent } from 'src/rents/entities/rent.interface';
 
 export type DocumentDocument = HydratedDocument<Document>;
 
@@ -11,10 +10,7 @@ export class Document {
     name: string;
 
     @Prop({ required: true, type: Object })
-    client: IClient;
-
-    @Prop({ required: true, type: Object })
-    vehicle: IVehicle;
+    rent: IRent;
 
     @Prop({ required: true })
     timestamp: string;

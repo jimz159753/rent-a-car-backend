@@ -13,7 +13,6 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
-import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { ApiBearerAuth, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -45,7 +44,7 @@ export class DocumentsController {
   )
   create(@Body() createDocumentDto: any, @UploadedFile() file: Express.Multer.File) {
     const newData = JSON.parse(createDocumentDto.data)
-    const newDocument = { ...newData, name: file.filename, client: JSON.parse(newData.client), vehicle: JSON.parse(newData.vehicle) }
+    const newDocument = { ...newData, name: file.filename, rent: JSON.parse(newData.rent) }
     return this.documentsService.create(newDocument);
   }
 
